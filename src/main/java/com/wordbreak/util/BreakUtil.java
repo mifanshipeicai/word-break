@@ -24,7 +24,7 @@ public class BreakUtil {
         }
 
         if (SingleCacheMapUtil.INSTANCE.getInstance().containsKey(key + s.substring(offset))) {
-            return SingleCacheMapUtil.INSTANCE.getInstance().get(s.substring(offset));
+            return SingleCacheMapUtil.INSTANCE.getInstance().get(key + s.substring(offset));
         }
 
         List<String> resultList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class BreakUtil {
                 }
             }
         }
-        SingleCacheMapUtil.INSTANCE.getInstance().put(s.substring(offset), resultList);
+        SingleCacheMapUtil.INSTANCE.getInstance().put(key + s.substring(offset), resultList);
         return resultList;
     }
 

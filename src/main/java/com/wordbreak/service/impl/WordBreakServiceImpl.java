@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 @Service
 public class WordBreakServiceImpl implements WordBreakService {
 
-    private static final String LOCAL = "local";
-    private static final String USER = "user";
-    private static final String LOCAL_USER = "local";
+    private static final String LOCAL = "local_";
+    private static final String USER = "user_";
+    private static final String LOCAL_USER = "local_user_";
 
     @Autowired
     private List<String> dictionaryList;
