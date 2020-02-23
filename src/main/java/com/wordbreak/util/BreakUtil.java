@@ -16,6 +16,14 @@ public class BreakUtil {
         return getBreakResult(key, s, wordDict, 0);
     }
 
+    /**
+     * break input search form local dictionary or user dictionary or those
+     * @param key
+     * @param s
+     * @param wordDict
+     * @param offset
+     * @return
+     */
     private static List<String> getBreakResult(String key, String s, List<String> wordDict, int offset) {
         if (offset == s.length()) {
             List<String> res = new ArrayList<>();
@@ -36,7 +44,7 @@ public class BreakUtil {
                 }
             }
         }
-        SingleCacheMapUtil.INSTANCE.getInstance().put(key + s.substring(offset), resultList);
+        if(!resultList.isEmpty()) SingleCacheMapUtil.INSTANCE.getInstance().put(key + s.substring(offset), resultList);
         return resultList;
     }
 
