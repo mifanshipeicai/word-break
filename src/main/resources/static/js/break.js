@@ -19,7 +19,10 @@ function breakWork() {
             console.log(result);
             if (result.code == 200) {
                 $("#output").text("");
-                $("#output").text(result.data);
+                for(var i = 0; i < result.data.length; i++){
+                    //$("#output").text(result.data[i]);
+                    $("#output").append("<span>"+result.data[i]+"</span><br>");//新增
+                }
             } else {
                 $("#output").text("");
                 alert(result.msg)
@@ -49,7 +52,10 @@ function breakUserWork() {
             console.log(result);
             if (result.code == 200) {
                 $("#output").text("");
-                $("#output").text(result.data);
+                for(var i = 0; i < result.data.length; i++){
+                    //$("#output").text(result.data[i]);
+                    $("#output").append("<span>"+result.data[i]+"</span><br>");//新增
+                }
             } else {
                 $("#output").text("");
                 alert(result.msg)
@@ -77,7 +83,11 @@ function breakUserLocalWork() {
         success: function (result) {
             console.log(result);
             if (result.code == 200) {
-                $("#output").text(result.data)
+                $("#output").text("");
+                for(var i = 0; i < result.data.length; i++){
+                    //$("#output").text(result.data[i]);
+                    $("#output").append("<span>"+result.data[i]+"</span><br>");//新增
+                }
             } else {
                 $("#output").text("");
                 alert(result.msg)

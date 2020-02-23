@@ -32,13 +32,16 @@ public class WordServiceTest {
 
         ApiResponse response = wordBreakService.breakWord(word);
         log.info("word break unit test :result-> [{}]", response.toString());
-        Assert.assertEquals(StatusResponse.SUCCESS.getCode(), response.getCode());
+
+        String getResult = response.getData().toString();
+        String trueResult = "[i like sam sung mobile, i like samsung mobile]";
+        Assert.assertEquals(getResult, trueResult);
     }
 
 
     @Test
     public void testNotDictionaryWordbreak() {
-        String word = "ilikeiphone";
+        String word = "ilikeoppo";
 
         ApiResponse response = wordBreakService.breakWord(word);
         log.error("word break unit test : the result-> [{}]", response.toString());
@@ -56,7 +59,11 @@ public class WordServiceTest {
         ApiResponse breakResponse = wordBreakService.breakUserWord(word);
 
         log.info("break user word unit test : the result-> [{}]", breakResponse.toString());
-        Assert.assertEquals(StatusResponse.SUCCESS.getCode(), breakResponse.getCode());
+
+        String getResult = breakResponse.getData().toString();
+        String trueResult = "[iphone huawei]";
+
+        Assert.assertEquals(getResult, trueResult);
     }
 
 
@@ -71,7 +78,11 @@ public class WordServiceTest {
         ApiResponse breakResponse = wordBreakService.breakUserAndLocaWork(word);
 
         log.info("break user word unit test : the result-> [{}]", breakResponse.toString());
-        Assert.assertEquals(StatusResponse.SUCCESS.getCode(), breakResponse.getCode());
+
+        String getResult = breakResponse.getData().toString();
+        String trueResult = "[i like iphone huawei ice]";
+
+        Assert.assertEquals(trueResult, getResult);
     }
 
 
@@ -82,6 +93,7 @@ public class WordServiceTest {
         //String[] wordArray = {"iphone","huawei","xiaomi"};
         ApiResponse response = wordBreakService.saveUserWord(words);
         log.info("save word unit test : the result-> [{}]", response.toString());
+
         Assert.assertEquals(StatusResponse.SUCCESS.getCode(), response.getCode());
     }
 

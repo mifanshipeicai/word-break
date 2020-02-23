@@ -54,7 +54,7 @@ public class WordBreakServiceImpl implements WordBreakService {
     @Override
     public ApiResponse breakUserWord(String word) {
         List<String> list = BreakUtil.wordBreak(USER, word, userDictionaryList);
-        if (list.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_DICTIONARY);
+        if (list.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_USER_DICTIONARY);
         return ApiResponse.ofSuccess(list);
     }
 
@@ -71,7 +71,7 @@ public class WordBreakServiceImpl implements WordBreakService {
         list.addAll(userDictionaryList);
         list = list.stream().distinct().collect(Collectors.toList());
         List<String> results = BreakUtil.wordBreak(LOCAL_USER, word, list);
-        if (results.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_DICTIONARY);
+        if (results.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_LOCAL_USER_DICTIONARY);
         return ApiResponse.ofSuccess(results);
     }
 

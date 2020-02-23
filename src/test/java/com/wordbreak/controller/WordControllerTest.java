@@ -18,6 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,9 +64,11 @@ public class WordControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
         JsonElement element = new JsonParser().parse(content);
         JsonObject json = element.getAsJsonObject();
-        int code = json.get("code").getAsInt();
+        String getResult = json.get("data").toString();
+        String trueResult = "[\"i like sam sung mobile\",\"i like samsung mobile\"]";
+        //List<String> trueResultList = Arrays.asList("i like sam sung mobile","i like samsung mobile");
 
-        Assert.assertEquals(StatusResponse.SUCCESS.getCode(), code);
+        Assert.assertEquals(trueResult,getResult);
     }
 
 
@@ -87,9 +92,10 @@ public class WordControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
         JsonElement element = new JsonParser().parse(content);
         JsonObject json = element.getAsJsonObject();
-        int code = json.get("code").getAsInt();
+        String getResult = json.get("data").toString();
+        String trueResult = "[\"i like iphone\"]";
 
-        Assert.assertEquals(StatusResponse.SUCCESS.getCode(), code);
+        Assert.assertEquals(trueResult, getResult);
     }
 
 
@@ -118,9 +124,10 @@ public class WordControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
         JsonElement element = new JsonParser().parse(content);
         JsonObject json = element.getAsJsonObject();
-        int code = json.get("code").getAsInt();
+        String getResult = json.get("data").toString();
+        String trueResult = "[\"i like iphone sam sung\",\"i like iphone samsung\"]";
 
-        Assert.assertEquals(StatusResponse.SUCCESS.getCode(), code);
+        Assert.assertEquals(trueResult, getResult);
     }
 
 
