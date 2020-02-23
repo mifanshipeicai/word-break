@@ -5,6 +5,9 @@ import com.wordbreak.service.WordBreakService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.concurrent.Callable;
 
 /**
@@ -42,12 +45,12 @@ public class WordController {
     /**
      * please use "," to separate your parameters like "hello,world"
      *
-     * @param word
+     * @param words
      * @return
      */
     @PostMapping("/user/save")
-    public Callable<ApiResponse> saveUserWord(String[] word) {
-        return ()-> wordBreakService.saveUserWord(word);
+    public Callable<ApiResponse> saveUserWord(String words) {
+        return () -> wordBreakService.saveUserWord(words);
     }
 
 

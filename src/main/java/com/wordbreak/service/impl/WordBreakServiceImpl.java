@@ -22,6 +22,10 @@ import java.util.stream.Collectors;
 @Service
 public class WordBreakServiceImpl implements WordBreakService {
 
+    private static final String LOCAL = "local";
+    private static final String USER = "user";
+    private static final String LOCAL_USER = "local";
+
     @Autowired
     private List<String> dictionaryList;
 
@@ -36,7 +40,7 @@ public class WordBreakServiceImpl implements WordBreakService {
      */
     @Override
     public ApiResponse breakWord(String word) {
-        List<String> list = BreakUtil.wordBreak(word, dictionaryList);
+        List<String> list = BreakUtil.wordBreak(LOCAL, word, dictionaryList);
         if (list.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_DICTIONARY);
         return ApiResponse.ofSuccess(list);
     }
@@ -49,7 +53,7 @@ public class WordBreakServiceImpl implements WordBreakService {
      */
     @Override
     public ApiResponse breakUserWord(String word) {
-        List<String> list = BreakUtil.wordBreak(word, userDictionaryList);
+        List<String> list = BreakUtil.wordBreak(USER, word, userDictionaryList);
         if (list.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_DICTIONARY);
         return ApiResponse.ofSuccess(list);
     }
@@ -66,7 +70,7 @@ public class WordBreakServiceImpl implements WordBreakService {
         list.addAll(dictionaryList);
         list.addAll(userDictionaryList);
         list = list.stream().distinct().collect(Collectors.toList());
-        List<String> results = BreakUtil.wordBreak(word, list);
+        List<String> results = BreakUtil.wordBreak(LOCAL_USER, word, list);
         if (results.isEmpty()) return ApiResponse.ofStatus(StatusResponse.NOT_HAS_DICTIONARY);
         return ApiResponse.ofSuccess(results);
     }
@@ -75,14 +79,14 @@ public class WordBreakServiceImpl implements WordBreakService {
     /**
      * save user word into his dictionary
      *
-     * @param word
+     * @param words
      * @return
      */
     @Override
-    public ApiResponse saveUserWord(String[] word) {
-        //String[] wordArray = word.split(",");
+    public ApiResponse saveUserWord(String words) {
+        String[] wordArray = words.split(",");
         //We can also determine if this is an empty collection and return
-        userDictionaryList.addAll(Arrays.asList(word));
+        userDictionaryList.addAll(Arrays.asList(wordArray));
         userDictionaryList = userDictionaryList.stream().filter((s) -> !s.equalsIgnoreCase("")).distinct().collect(Collectors.toList());
         return ApiResponse.ofSuccess(null);
     }

@@ -11,10 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author little_super
+ * @author yanchao
  * @project word-break
  * @package com.wordbreak.service
- * @create 2020-02-23 10:22
+ * @create 2020-02-23
  */
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -47,8 +47,9 @@ public class WordServiceTest {
 
     @Test
     public void testBreakUserWordbreak() {
-        String[] wordArray = {"iphone","xiaomi","huawei"};
-        ApiResponse response = wordBreakService.saveUserWord(wordArray);
+        String words = "iphone,xiaomi,huawei";
+        //String[] wordArray = {"iphone","huawei","xiaomi"};
+        ApiResponse response = wordBreakService.saveUserWord(words);
         Assert.assertEquals(StatusResponse.SUCCESS.getCode(), response.getCode());
 
         String word = "iphonehuawei";
@@ -61,8 +62,9 @@ public class WordServiceTest {
 
     @Test
     public void testBreakUserLocalWordbreak() {
-        String[] wordArray = {"iphone","xiaomi","huawei"};
-        ApiResponse response = wordBreakService.saveUserWord(wordArray);
+        String words = "iphone,xiaomi,huawei";
+        //String[] wordArray = {"iphone","huawei","xiaomi"};
+        ApiResponse response = wordBreakService.saveUserWord(words);
         Assert.assertEquals(StatusResponse.SUCCESS.getCode(), response.getCode());
 
         String word = "ilikeiphonehuaweiice";
@@ -75,12 +77,13 @@ public class WordServiceTest {
 
     @Test
     public void testSaveWordbreak() {
-        String[] wordArray = {"iphone","xiaomi","huawei"};
-        ApiResponse response = wordBreakService.saveUserWord(wordArray);
+        String words = "iphone,xiaomi,huawei";
+        //String wordArray = "iphone xiaomi huawei";
+        //String[] wordArray = {"iphone","huawei","xiaomi"};
+        ApiResponse response = wordBreakService.saveUserWord(words);
         log.info("save word unit test : the result-> [{}]", response.toString());
         Assert.assertEquals(StatusResponse.SUCCESS.getCode(), response.getCode());
     }
-
 
 
 }

@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * @author little_super
+ * @author yanchao
  * @project word-break
  * @package com.wordbreak.controller
  * @create 2020-02-23
@@ -102,7 +102,8 @@ public class WordControllerTest {
     public void testUserLocalBreak() throws Exception {
         //befor word
         String saveWord = "iphone,xiaomi,huawei";
-        wordBreakService.saveUserWord(saveWord.split(","));
+        //String[] saveWord = {"iphone","huawei","xiaomi"};
+        wordBreakService.saveUserWord(saveWord);
 
         //String word = "ilikesamsungmobile";
         String word = "ilikeiphonesamsung";
@@ -125,17 +126,17 @@ public class WordControllerTest {
 
     @Test
     public void testUserSave() throws Exception {
-        String word = "iphone,xiaomi,huawei";
+        String words = "iphone,xiaomi,huawei";
 
         MvcResult mvcResult = mockMvc.perform(
                 MockMvcRequestBuilders
                         .post(PREFIX_URL + "/user/save")
-                        .param("word",word))
+                        .param("words",words))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
 
-        ApiResponse response = (ApiResponse)mvcResult.getAsyncResult(5000);
+        ApiResponse response = (ApiResponse)mvcResult.getAsyncResult(15000);
         Assert.assertEquals(StatusResponse.SUCCESS.getCode(), response.getCode());
     }
 

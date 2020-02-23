@@ -17,6 +17,6 @@ public interface WordBreakService {
 
     ApiResponse breakUserAndLocaWork(String word);
 
-    ApiResponse saveUserWord(String[] word);
+    ApiResponse saveUserWord(String words);
 
 }
